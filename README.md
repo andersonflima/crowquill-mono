@@ -12,12 +12,14 @@ largura folgada), com uma
 feature OpenType `calt` que troca a sequência exata de uma keyword pelos glifos em negrito,
 **só quando é a palavra inteira** — `const` bolda, `constante`/`myconst`/`const_val` não.
 
-Acompanha o tema **Crowquill Ink** (Neovim + VS Code) — monocromático (preto & branco),
-em duas variantes **dark** e **light**: a keyword salta em contraste máximo (branco/preto puro)
-com **negrito bem forte**, os blocos `{}` `[]` `:` ficam acesos, e os comentários saem em
-**itálico cursivo** (face itálica da fonte). Todo o resto fica em tons de cinza.
+Acompanha o tema **[Crowquill Ink](https://github.com/andersonflima/crowquill-theme)** — em
+**repo próprio**, monocromático (preto & branco), para **Neovim, VS Code, Ghostty, tmux, fish
+e starship**. A keyword salta em contraste máximo (branco/preto puro) com **negrito bem forte**,
+os blocos `{}` `[]` `:` ficam acesos, e os comentários saem em **itálico cursivo**.
 
 ## Preview
+
+![Crowquill em cascata](dist/hero.png)
 
 Dark — fundo preto, fonte branca:
 
@@ -58,21 +60,23 @@ brew install --cask font-crowquill-mono
 
 > O Homebrew pode pedir para confiar no tap na primeira vez: `brew trust andersonflima/fonts`.
 
-Isso instala **só a fonte**. Para o **tema** do editor, use o `install.sh` abaixo ou os arquivos em `editor/`.
+Isso instala **só a fonte**. O **tema** (editor + terminal) fica em repo próprio:
+**[crowquill-theme](https://github.com/andersonflima/crowquill-theme)**.
 
-### Fonte + tema (script do repo)
+### Via script (fontes)
 
 ```bash
-./scripts/install.sh          # fontes + tema VS Code + colorscheme Neovim
+./scripts/install.sh          # instala as 4 faces em ~/Library/Fonts
 ```
 
-Depois:
+### Configurar a fonte no editor
 
-- **VS Code** — cole `editor/vscode/settings-snippet.jsonc` no seu settings. É obrigatório
-  `"editor.fontLigatures": true` (o negrito-de-keyword é `calt`). Selecione o tema
-  *Crowquill Dark*.
-- **Neovim** — veja `editor/nvim/README.md`. Terminal com suporte a ligaduras (kitty, WezTerm,
-  Ghostty) mostra o negrito da fonte; o colorscheme já mantém `@keyword` em bold como fallback.
+- **VS Code** — `"editor.fontFamily": "Crowquill Mono"` + `"editor.fontLigatures": true`
+  (o negrito-de-keyword é `calt`, precisa de ligaduras ligadas).
+- **Neovim** — use a família `Crowquill Mono` (guifont no Neovide, ou fonte do terminal com
+  suporte a ligaduras: Ghostty/kitty/WezTerm).
+
+O tema (`Crowquill Ink`) vem do repo [crowquill-theme](https://github.com/andersonflima/crowquill-theme).
 
 ## Build a partir do código
 
