@@ -1,0 +1,40 @@
+{
+  "name": "crowquill-theme",
+  "displayName": "Crowquill Dark",
+  "description": "Playful-but-professional dark theme tuned for the Crowquill Mono font. Language keywords render BOLD with a signature coral-pink accent, on a comfortable deep blue-gray base for long coding sessions.",
+  "version": "0.1.0",
+  "publisher": "andersonflima",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "keywords": [
+    "theme",
+    "dark",
+    "color-theme",
+    "crowquill",
+    "crowquill mono",
+    "bold keywords"
+  ],
+  "galleryBanner": {
+    "color": "#1B1E2B",
+    "theme": "dark"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andersonflima/crowquill-mono.git",
+    "directory": "editor/vscode"
+  },
+  "contributes": {
+    "themes": [
+      {
+        "label": "Crowquill Dark",
+        "uiTheme": "vs-dark",
+        "path": "./themes/crowquill-dark-color-theme.json"
+      }
+    ]
+  }
+}
