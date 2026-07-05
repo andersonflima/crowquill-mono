@@ -1,5 +1,9 @@
 # Crowquill Mono
 
+[![release](https://img.shields.io/github/v/release/andersonflima/crowquill-mono?sort=semver)](https://github.com/andersonflima/crowquill-mono/releases)
+[![Homebrew](https://img.shields.io/badge/brew-font--crowquill--mono-informational)](https://github.com/andersonflima/homebrew-fonts)
+[![license: OFL 1.1](https://img.shields.io/badge/license-OFL--1.1-blue.svg)](OFL.txt)
+
 Fonte de programação que **deixa as palavras reservadas em negrito automaticamente** —
 a própria fonte diferencia keywords das linguagens, sem depender do tema do editor.
 
@@ -32,6 +36,19 @@ Elixir, C/C++, Java, Ruby, SQL, Bash). O Python `True/False/None` (maiúsculo) e
 > O **tema** cobre esse caso (comentário/string têm cor própria e prioridade visual).
 
 ## Instalar
+
+### Via Homebrew (recomendado)
+
+```bash
+brew tap andersonflima/fonts
+brew install --cask font-crowquill-mono
+```
+
+> O Homebrew pode pedir para confiar no tap na primeira vez: `brew trust andersonflima/fonts`.
+
+Isso instala **só a fonte**. Para o **tema** do editor, use o `install.sh` abaixo ou os arquivos em `editor/`.
+
+### Fonte + tema (script do repo)
 
 ```bash
 ./scripts/install.sh          # fontes + tema VS Code + colorscheme Neovim
