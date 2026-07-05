@@ -1,8 +1,10 @@
-Copyright 2020 The JetBrains Mono Project Authors (https://github.com/JetBrains/JetBrainsMono)
+Copyright 2015-2024 Belleve Invis (The Iosevka Project, https://github.com/be5invis/Iosevka)
 Copyright 2026 The Crowquill Mono Project Authors (https://github.com/andersonflima/crowquill-mono)
 
-Crowquill Mono is a derivative of JetBrains Mono. The added keyword-bold
-OpenType feature and the bold keyword glyph variants are original to this work.
+Crowquill Mono is built from a custom build of Iosevka (a "Curly" ss20 variant
+with handwritten forms, a cursive italic and a widened advance). The added
+keyword-bold OpenType feature and the bold keyword glyph variants are original
+to this work.
 
 This Font Software is licensed under the SIL Open Font License, Version 1.1.
 This license is copied below, and is also available with a FAQ at:

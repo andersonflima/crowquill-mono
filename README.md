@@ -7,7 +7,8 @@
 Fonte de programação que **deixa as palavras reservadas em negrito automaticamente** —
 a própria fonte diferencia keywords das linguagens, sem depender do tema do editor.
 
-Base **JetBrains Mono** (métrica, legibilidade e ligaduras nativas preservadas), com uma
+Base: um **build custom do Iosevka** (variante Curly + formas manuscritas + itálico cursivo +
+largura folgada), com uma
 feature OpenType `calt` que troca a sequência exata de uma keyword pelos glifos em negrito,
 **só quando é a palavra inteira** — `const` bolda, `constante`/`myconst`/`const_val` não.
 
@@ -22,13 +23,13 @@ máximo (branco/preto puro) + negrito + sublinhado, e todo o resto fica em tons 
 
 Uma fonte não entende a linguagem — ela casa **sequências de caracteres**. Então:
 
-1. Copiamos os glifos das letras da JetBrains **Bold** para dentro da Regular como
-   variantes `a.kw`, `b.kw`, … (mesma largura mono, sem distorção).
+1. Copiamos os glifos das letras do peso **Heavy (900)** para dentro da Regular como
+   variantes `a.kw`, `b.kw`, … (mesma largura mono, sem distorção) — keyword salta forte.
 2. Geramos uma feature `calt` com **guarda de fronteira**: para cada keyword há regras
    `ignore` que cancelam a troca quando a palavra está colada a outro caractere de
    identificador (`[A-Za-z0-9_]`). Só quando é token isolado a troca `letra → letra.kw`
    acontece.
-3. As **ligaduras nativas** da JetBrains são preservadas (fazemos *merge* no GSUB em vez de
+3. As **ligaduras nativas** do Iosevka são preservadas (fazemos *merge* no GSUB em vez de
    sobrescrever).
 
 Cobertura atual: **338 keywords** de 14 linguagens (JS/TS, Python, Go, Rust, C#, Haskell,
@@ -79,17 +80,16 @@ As fontes-fonte ficam em `sources/` (baixadas dos releases oficiais); a lista de
 
 ## Roadmap
 
-- **v0.1 (atual)** — JetBrains base + keyword-bold + ligaduras nativas + tema.
-- **v0.2** — enxertar letterforms informais do **Comic Neue** (OFL) num conjunto curado de
-  glifos (`a`, `g`, `y`, `l`, `i`…) para o toque "Comic Sans", ajustados à célula mono.
-- **v0.3** — opção de ligaduras estilo **Fira Code** adicionais; variante Nerd Font (ícones).
+- **v0.1** — base JetBrains Mono + keyword-bold + tema.
+- **v0.2** — tema Ink monocromático (dark/light) + faces itálicas.
+- **v0.3 (atual)** — base trocada por um **build custom do Iosevka** (Curly + manuscrito +
+  itálico cursivo + largura folgada), 4 faces, keyword-bold do Heavy 900. Plano em `iosevka/`.
+- **próximo** — variante Nerd Font (ícones); afinar variantes caligráficas.
 
 ## Licenças / atribuição
 
-- **JetBrains Mono** — SIL Open Font License 1.1.
-- **Fira Code** — SIL Open Font License 1.1.
-- **Comic Neue** — SIL Open Font License 1.1 (substituto aberto do Comic Sans, que é
-  proprietário e não pode ser redistribuído/derivado).
+- **Iosevka** — SIL Open Font License 1.1 (© Belleve Invis). Crowquill Mono é um derivado
+  de um build custom do Iosevka; o plano de build fica em `iosevka/private-build-plans.toml`.
 
 Este projeto é um derivado sob **OFL 1.1**. "Crowquill Mono" não usa os nomes reservados das
 fontes originais.

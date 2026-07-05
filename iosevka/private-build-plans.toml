@@ -1,0 +1,56 @@
+# Crowquill — build custom (base pra fonte Crowquill Mono)
+# Curly (ss20) + formas manuscritas + italico cursivo + largura folgada.
+
+[buildPlans.Crowquill]
+family = "Crowquill"
+spacing = "normal"          # ligaduras de codigo
+serifs = "sans"
+exportGlyphNames = true
+
+[buildPlans.Crowquill.variants]
+inherits = "ss20"           # Curly (terminais curvos, caligrafico)
+
+[buildPlans.Crowquill.variants.design]
+g = 'single-storey-serifless'   # g manuscrito (andar unico)
+
+[buildPlans.Crowquill.variants.italic]
+i = 'tailed-serifed'            # comentarios: caudas cursivas
+l = 'tailed-serifed'
+
+[buildPlans.Crowquill.ligations]
+inherits = "default-calt"
+
+# pesos: Regular corpo, Bold, Heavy (fonte do keyword-bold)
+[buildPlans.Crowquill.weights.Regular]
+shape = 400
+menu = 400
+css = 400
+
+[buildPlans.Crowquill.weights.Bold]
+shape = 700
+menu = 700
+css = 700
+
+[buildPlans.Crowquill.weights.Heavy]
+shape = 900
+menu = 900
+css = 900
+
+# so vertical + italico cursivo (pula oblique)
+[buildPlans.Crowquill.slopes.Upright]
+angle = 0
+shape = "upright"
+menu = "upright"
+css = "normal"
+
+[buildPlans.Crowquill.slopes.Italic]
+angle = 11
+shape = "italic"
+menu = "italic"
+css = "italic"
+
+# largura um pouco mais folgada que a Iosevka padrao (500)
+[buildPlans.Crowquill.widths.Normal]
+shape = 560
+menu = 5
+css = "normal"

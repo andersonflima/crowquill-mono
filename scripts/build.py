@@ -31,7 +31,7 @@ DIST = ROOT / "dist"
 
 FAMILY = "Crowquill Mono"
 PS_FAMILY = "CrowquillMono"
-VERSION = "0.2.0"
+VERSION = "0.3.0"
 
 BASE_TTF = SRC / "jbmono" / "fonts" / "ttf" / "JetBrainsMono-Regular.ttf"
 BOLD_TTF = SRC / "jbmono" / "fonts" / "ttf" / "JetBrainsMono-Bold.ttf"
@@ -255,14 +255,14 @@ def main() -> int:
     BUILD.mkdir(exist_ok=True)
     DIST.mkdir(exist_ok=True)
 
-    ttf_dir = SRC / "jbmono" / "fonts" / "ttf"
-    reg = ttf_dir / "JetBrainsMono-Regular.ttf"
-    bold = ttf_dir / "JetBrainsMono-Bold.ttf"
-    xbold = ttf_dir / "JetBrainsMono-ExtraBold.ttf"
-    ital = ttf_dir / "JetBrainsMono-Italic.ttf"
-    bital = ttf_dir / "JetBrainsMono-BoldItalic.ttf"
-    xbital = ttf_dir / "JetBrainsMono-ExtraBoldItalic.ttf"
-    for f in (reg, bold, xbold, ital, bital, xbital):
+    ttf_dir = SRC / "iosevka"   # build custom do Iosevka (Curly + manuscrito)
+    reg = ttf_dir / "Crowquill-Regular.ttf"
+    bold = ttf_dir / "Crowquill-Bold.ttf"
+    heavy = ttf_dir / "Crowquill-Heavy.ttf"
+    ital = ttf_dir / "Crowquill-Italic.ttf"
+    bital = ttf_dir / "Crowquill-BoldItalic.ttf"
+    hital = ttf_dir / "Crowquill-HeavyItalic.ttf"
+    for f in (reg, bold, heavy, ital, bital, hital):
         if not f.exists():
             print(f"ERRO: fonte-fonte ausente: {f}", file=sys.stderr)
             return 1
@@ -270,12 +270,11 @@ def main() -> int:
     keywords = load_keywords()
     print(f"Crowquill Mono {VERSION} — build ({len(keywords)} keywords)")
 
-    # Upright: keyword-bold via a heavier upright weight.
-    build_face(reg, bold, keywords, "Regular", is_bold=False)
-    build_face(bold, xbold, keywords, "Bold", is_bold=True)
-    # Italic (comentarios): keyword-bold via a heavier italic weight.
-    build_face(ital, bital, keywords, "Italic", is_bold=False, is_italic=True)
-    build_face(bital, xbital, keywords, "Bold Italic", is_bold=True, is_italic=True)
+    # Keyword-bold vem do Heavy (900) -> keyword salta forte contra o corpo.
+    build_face(reg, heavy, keywords, "Regular", is_bold=False)
+    build_face(bold, heavy, keywords, "Bold", is_bold=True)
+    build_face(ital, hital, keywords, "Italic", is_bold=False, is_italic=True)
+    build_face(bital, hital, keywords, "Bold Italic", is_bold=True, is_italic=True)
     return 0
 
 
