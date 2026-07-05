@@ -6,3 +6,4 @@ sources/firacode/
 build/
 *.pyc
 sources/ComicNeue-*.ttf
+dist/*.zip
