@@ -11,9 +11,12 @@ Base **JetBrains Mono** (métrica, legibilidade e ligaduras nativas preservadas)
 feature OpenType `calt` que troca a sequência exata de uma keyword pelos glifos em negrito,
 **só quando é a palavra inteira** — `const` bolda, `constante`/`myconst`/`const_val` não.
 
-Acompanha um **tema casado** (VS Code + Neovim) que reforça o destaque com cor.
+Acompanha o tema **Crowquill Ink** (VS Code + Neovim) — monocromático (preto & branco),
+em duas variantes **dark** e **light**, onde a keyword é o único elemento em contraste
+máximo (branco/preto puro) + negrito + sublinhado, e todo o resto fica em tons de cinza.
 
-![specimen](dist/specimen.png)
+![Crowquill Ink dark](dist/specimen-dark.png)
+![Crowquill Ink light](dist/specimen-light.png)
 
 ## Como funciona (o truque)
 

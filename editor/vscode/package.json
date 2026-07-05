@@ -1,8 +1,8 @@
 {
   "name": "crowquill-theme",
-  "displayName": "Crowquill Dark",
-  "description": "Playful-but-professional dark theme tuned for the Crowquill Mono font. Language keywords render BOLD with a signature coral-pink accent, on a comfortable deep blue-gray base for long coding sessions.",
-  "version": "0.1.0",
+  "displayName": "Crowquill Ink",
+  "description": "Strict monochrome (black & white / grayscale) ink theme tuned for the Crowquill Mono font. Language keywords are the single brightest (dark) / darkest (light) element, rendered BOLD with a signature underline, while everything else stays a dimmer shade of gray. Ships two variants: Ink Dark and Ink Light.",
+  "version": "0.2.0",
   "publisher": "andersonflima",
   "license": "MIT",
   "engines": {
@@ -13,14 +13,16 @@
   ],
   "keywords": [
     "theme",
-    "dark",
+    "monochrome",
+    "grayscale",
+    "black and white",
     "color-theme",
     "crowquill",
     "crowquill mono",
     "bold keywords"
   ],
   "galleryBanner": {
-    "color": "#1B1E2B",
+    "color": "#0A0A0A",
     "theme": "dark"
   },
   "repository": {
@@ -31,9 +33,14 @@
   "contributes": {
     "themes": [
       {
-        "label": "Crowquill Dark",
+        "label": "Crowquill Ink Dark",
         "uiTheme": "vs-dark",
         "path": "./themes/crowquill-dark-color-theme.json"
+      },
+      {
+        "label": "Crowquill Ink Light",
+        "uiTheme": "vs",
+        "path": "./themes/crowquill-light-color-theme.json"
       }
     ]
   }

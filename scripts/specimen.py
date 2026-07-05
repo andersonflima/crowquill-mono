@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""Render a colored specimen PNG of Crowquill Mono using real HarfBuzz shaping.
+"""Render monochrome (ink) specimens of Crowquill Mono using real HarfBuzz shaping.
 
 Monospace => fixed advance per cell, so tokens are placed by column. Keyword
 tokens are drawn in isolation, which lets the font's own `calt` bold them
-(.kw glyphs). Colors come from the Crowquill dark theme palette.
+(.kw glyphs); in the theme keywords are the single brightest/darkest element,
+bold + underlined, so we mirror that here (pure white on black / pure black on
+white, plus an underline).
 """
 import json
 import re
@@ -13,11 +15,14 @@ from PIL import Image, ImageDraw, ImageFont
 ROOT = Path(__file__).resolve().parent.parent
 REG = ROOT / "dist" / "CrowquillMono-Regular.ttf"
 BOLD = ROOT / "dist" / "CrowquillMono-Bold.ttf"
-OUT = ROOT / "dist" / "specimen.png"
 
-# theme palette
-BG = "#1B1E2B"; FG = "#E4E6F1"; KW = "#FF6B9D"; STR = "#A5E075"
-NUM = "#F5A25C"; COM = "#6C7392"; FUNC = "#6BC1FF"; TYPE = "#FFD166"; ACC = "#C792EA"
+# strict grayscale ink palettes — keyword is the standout (bold + underline)
+PALETTES = {
+    "dark":  {"BG": "#0A0A0A", "FG": "#B4B4B4", "KW": "#FFFFFF", "STR": "#8C8C8C",
+              "NUM": "#D2D2D2", "COM": "#565656", "FUNC": "#EAEAEA"},
+    "light": {"BG": "#FFFFFF", "FG": "#3C3C3C", "KW": "#000000", "STR": "#6C6C6C",
+              "NUM": "#2A2A2A", "COM": "#9E9E9E", "FUNC": "#141414"},
+}
 
 MASTER = set(json.loads((ROOT / "sources" / "keywords.json").read_text())["master"])
 
@@ -27,7 +32,7 @@ LINE = int(SIZE * 1.55)
 MARGIN = 40
 
 lines = [
-    ("c", "// Crowquill Mono — keywords ficam bold sozinhas"),
+    ("c", "// Crowquill Ink — keywords saltam: branco/preto puro, bold, sublinhado"),
     ("", ""),
     ("py", "def fibonacci(n):"),
     ("py", "    if n <= 1:"),
@@ -52,56 +57,56 @@ NUM_RE = re.compile(r'\b\d+\b')
 WORD_RE = re.compile(r'[A-Za-z_][A-Za-z0-9_]*|.')
 
 
-def classify(tok: str) -> str:
-    if tok in MASTER:
-        return KW
-    if NUM_RE.fullmatch(tok):
-        return NUM
-    return FG
-
-
-def draw_line(draw, font, y, text):
-    # comment: whole line
+def draw_line(draw, font, y, text, pal):
     if text.lstrip().startswith(("//", "#")):
-        draw.text((MARGIN, y), text, font=font, fill=COM)
+        draw.text((MARGIN, y), text, font=font, fill=pal["COM"])
         return
-    col = 0
+    ul_y = int(y + SIZE * 1.06)
     i = 0
+    col = 0
     while i < len(text):
         m = STR_RE.match(text, i)
         if m:
             s = m.group(0)
-            draw.text((MARGIN + col * CELL, y), s, font=font, fill=STR)
+            draw.text((MARGIN + col * CELL, y), s, font=font, fill=pal["STR"])
             col += len(s); i = m.end(); continue
         m = WORD_RE.match(text, i)
         tok = m.group(0)
-        # inline comment
-        if tok == "/" and text[i:i+2] == "//":
-            rest = text[i:]
-            draw.text((MARGIN + col * CELL, y), rest, font=font, fill=COM)
+        if tok == "/" and text[i:i + 2] == "//":
+            draw.text((MARGIN + col * CELL, y), text[i:], font=font, fill=pal["COM"])
             break
-        color = classify(tok)
-        draw.text((MARGIN + col * CELL, y), tok, font=font, fill=color)
+        x = MARGIN + col * CELL
+        if tok in MASTER:                       # keyword: standout + underline
+            draw.text((x, y), tok, font=font, fill=pal["KW"])
+            draw.line([(x, ul_y), (x + len(tok) * CELL - CELL * 0.15, ul_y)],
+                      fill=pal["KW"], width=2)
+        elif NUM_RE.fullmatch(tok):
+            draw.text((x, y), tok, font=font, fill=pal["NUM"])
+        else:
+            draw.text((x, y), tok, font=font, fill=pal["FG"])
         col += len(tok); i = m.end()
 
 
-def main():
-    width = MARGIN * 2 + int(60 * CELL)
+def render(variant):
+    pal = PALETTES[variant]
+    width = MARGIN * 2 + int(64 * CELL)
     height = MARGIN * 2 + LINE * (len(lines) + 2)
-    img = Image.new("RGB", (width, height), BG)
+    img = Image.new("RGB", (width, height), pal["BG"])
     draw = ImageDraw.Draw(img)
     font = ImageFont.truetype(str(REG), SIZE, layout_engine=ImageFont.Layout.RAQM)
     title = ImageFont.truetype(str(BOLD), int(SIZE * 1.2), layout_engine=ImageFont.Layout.RAQM)
 
-    draw.text((MARGIN, MARGIN), "Crowquill Mono", font=title, fill=KW)
+    draw.text((MARGIN, MARGIN), f"Crowquill Ink · {variant}", font=title, fill=pal["KW"])
     y = MARGIN + LINE * 2
     for _, text in lines:
         if text:
-            draw_line(draw, font, y, text)
+            draw_line(draw, font, y, text, pal)
         y += LINE
-    img.save(OUT)
-    print("salvo:", OUT)
+    out = ROOT / "dist" / f"specimen-{variant}.png"
+    img.save(out)
+    print("salvo:", out)
 
 
 if __name__ == "__main__":
-    main()
+    render("dark")
+    render("light")

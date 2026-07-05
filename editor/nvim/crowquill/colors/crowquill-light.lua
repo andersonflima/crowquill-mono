@@ -1,33 +1,34 @@
 -- =============================================================================
---  Crowquill Ink  —  Neovim colorscheme (dark)
+--  Crowquill Ink  —  Neovim colorscheme (light)
 -- -----------------------------------------------------------------------------
---  A strict MONOCHROME (black & white / grayscale) ink theme tuned for the
---  Crowquill Mono font. Signature: language keywords / storage / control-flow
---  are the single BRIGHTEST element — pure white, BOLD and UNDERLINED — while
---  everything else is a dimmer shade of gray. No chromatic colors anywhere.
+--  A strict MONOCHROME (black & white / grayscale) ink-on-paper theme tuned
+--  for the Crowquill Mono font. Signature: language keywords / storage /
+--  control-flow are the single DARKEST element — pure black, BOLD and
+--  UNDERLINED — while everything else is a dimmer shade of gray. No chromatic
+--  colors anywhere.
 --
---  Palette is kept identical to the VS Code "Crowquill Ink Dark" theme.
+--  Palette is kept identical to the VS Code "Crowquill Ink Light" theme.
 --
---    bg        #0A0A0A   base editor background (near-black)
---    bg_alt    #0F0F0F   sidebars / floats / panels
---    bg_dark   #000000   deepest surfaces / statusline / ansi black
---    bg_hi     #141414   line highlight
---    sel       #2A2A2A   selection / visual
---    border    #1E1E1E   splits / borders
---    fg        #B4B4B4   default foreground (variables, identifiers)
---    fg_dim    #9A9A9A   secondary foreground
---    gutter    #4A4A4A   line numbers / muted UI
---    comment   #565656   comments (italic)
---    white     #FFFFFF   SIGNATURE keyword (bold + underline) — brightest
---    string    #8C8C8C   strings
---    number    #D2D2D2   numbers / constants / booleans
---    func      #EAEAEA   functions / methods
---    type      #C6C6C6   types / classes / interfaces / properties
+--    bg        #FFFFFF   base editor background (paper)
+--    bg_alt    #F7F7F7   sidebars / floats / panels
+--    bg_light  #F0F0F0   statusline / tabline
+--    bg_hi     #F2F2F2   line highlight
+--    sel       #DADADA   selection / visual
+--    border    #E4E4E4   splits / borders
+--    fg        #3C3C3C   default foreground (variables, identifiers)
+--    fg_dim    #5C5C5C   secondary foreground
+--    gutter    #B0B0B0   line numbers / muted UI
+--    comment   #9E9E9E   comments (italic)
+--    black     #000000   SIGNATURE keyword (bold + underline) — darkest
+--    string    #6C6C6C   strings
+--    number    #2A2A2A   numbers / constants / booleans
+--    func      #141414   functions / methods
+--    type      #3A3A3A   types / classes / interfaces / properties
 --    operator  #7C7C7C   operators
---    punct     #6E6E6E   punctuation
---    param     #A0A0A0   parameters (italic)
+--    punct     #8A8A8A   punctuation
+--    param     #5C5C5C   parameters (italic)
 --
---  Usage:  vim.o.background = "dark"  →  vim.cmd.colorscheme("crowquill")
+--  Usage:  vim.o.background = "light"  →  vim.cmd.colorscheme("crowquill-light")
 -- =============================================================================
 
 local M = {}
@@ -38,37 +39,37 @@ if vim.fn.exists("syntax_on") == 1 then
   vim.cmd("syntax reset")
 end
 
-vim.o.background = "dark"
-vim.g.colors_name = "crowquill"
+vim.o.background = "light"
+vim.g.colors_name = "crowquill-light"
 
 -- ---------------------------------------------------------------------------
 -- Palette (strict grayscale — every value has R == G == B)
 -- ---------------------------------------------------------------------------
 local c = {
-  bg       = "#0A0A0A",
-  bg_alt   = "#0F0F0F",
-  bg_dark  = "#000000",
-  bg_hi    = "#141414",
-  sel      = "#2A2A2A",
-  border   = "#1E1E1E",
-  fg       = "#B4B4B4",
-  fg_dim   = "#9A9A9A",
-  gutter   = "#4A4A4A",
-  comment  = "#565656",
-  doc      = "#606060",
-  white    = "#FFFFFF",
-  string   = "#8C8C8C",
-  number   = "#D2D2D2",
-  func     = "#EAEAEA",
-  type     = "#C6C6C6",
+  bg       = "#FFFFFF",
+  bg_alt   = "#F7F7F7",
+  bg_light = "#F0F0F0",
+  bg_hi    = "#F2F2F2",
+  sel      = "#DADADA",
+  border   = "#E4E4E4",
+  fg       = "#3C3C3C",
+  fg_dim   = "#5C5C5C",
+  gutter   = "#B0B0B0",
+  comment  = "#9E9E9E",
+  doc      = "#909090",
+  black    = "#000000",
+  string   = "#6C6C6C",
+  number   = "#2A2A2A",
+  func     = "#141414",
+  type     = "#3A3A3A",
   operator = "#7C7C7C",
-  punct    = "#6E6E6E",
-  param    = "#A0A0A0",
+  punct    = "#8A8A8A",
+  param    = "#5C5C5C",
   -- diagnostics: grayscale only, differentiated by lightness + undercurl
-  err      = "#C6C6C6",
-  warn     = "#9A9A9A",
-  info     = "#7C7C7C",
-  hint     = "#6E6E6E",
+  err      = "#3A3A3A",
+  warn     = "#6C6C6C",
+  info     = "#8A8A8A",
+  hint     = "#9E9E9E",
   none     = "NONE",
 }
 
@@ -80,8 +81,8 @@ local function hl(group, opts)
   set(0, group, opts)
 end
 
--- Signature keyword style: brightest + bold + underline.
-local KW = { fg = c.white, bold = true, underline = true }
+-- Signature keyword style: darkest + bold + underline.
+local KW = { fg = c.black, bold = true, underline = true }
 
 -- ---------------------------------------------------------------------------
 -- Editor UI
@@ -90,12 +91,12 @@ hl("Normal",         { fg = c.fg, bg = c.bg })
 hl("NormalNC",       { fg = c.fg, bg = c.bg })
 hl("NormalFloat",    { fg = c.fg, bg = c.bg_alt })
 hl("FloatBorder",    { fg = c.border, bg = c.bg_alt })
-hl("FloatTitle",     { fg = c.white, bg = c.bg_alt, bold = true })
+hl("FloatTitle",     { fg = c.black, bg = c.bg_alt, bold = true })
 hl("ColorColumn",    { bg = c.bg_hi })
-hl("Cursor",         { fg = c.bg, bg = c.white })
+hl("Cursor",         { fg = c.bg, bg = c.black })
 hl("CursorLine",     { bg = c.bg_hi })
 hl("CursorColumn",   { bg = c.bg_hi })
-hl("CursorLineNr",   { fg = c.white, bold = true })
+hl("CursorLineNr",   { fg = c.black, bold = true })
 hl("LineNr",         { fg = c.gutter })
 hl("SignColumn",     { fg = c.gutter, bg = c.bg })
 hl("FoldColumn",     { fg = c.gutter, bg = c.bg })
@@ -104,36 +105,36 @@ hl("VertSplit",      { fg = c.border })
 hl("WinSeparator",   { fg = c.border })
 hl("Visual",         { bg = c.sel })
 hl("VisualNOS",      { bg = c.sel })
-hl("Search",         { fg = c.bg_dark, bg = c.number })
-hl("IncSearch",      { fg = c.bg_dark, bg = c.white })
-hl("CurSearch",      { fg = c.bg_dark, bg = c.white })
-hl("MatchParen",     { fg = c.white, bold = true, underline = true })
-hl("NonText",        { fg = "#282828" })
-hl("Whitespace",     { fg = "#282828" })
-hl("SpecialKey",     { fg = "#282828" })
+hl("Search",         { fg = c.bg, bg = c.number })
+hl("IncSearch",      { fg = c.bg, bg = c.black })
+hl("CurSearch",      { fg = c.bg, bg = c.black })
+hl("MatchParen",     { fg = c.black, bold = true, underline = true })
+hl("NonText",        { fg = "#D8D8D8" })
+hl("Whitespace",     { fg = "#D8D8D8" })
+hl("SpecialKey",     { fg = "#D8D8D8" })
 hl("EndOfBuffer",    { fg = c.bg })
 hl("Conceal",        { fg = c.comment })
 hl("Directory",      { fg = c.func })
-hl("Title",          { fg = c.white, bold = true })
+hl("Title",          { fg = c.black, bold = true })
 hl("ErrorMsg",       { fg = c.err })
 hl("WarningMsg",     { fg = c.warn })
 hl("ModeMsg",        { fg = c.fg_dim, bold = true })
 hl("MoreMsg",        { fg = c.fg_dim })
 hl("Question",       { fg = c.fg_dim })
-hl("WildMenu",       { fg = c.bg_dark, bg = c.white })
+hl("WildMenu",       { fg = c.bg, bg = c.black })
 
 -- Statusline / tabline
-hl("StatusLine",     { fg = c.fg_dim, bg = c.bg_dark })
-hl("StatusLineNC",   { fg = c.comment, bg = c.bg_dark })
-hl("TabLine",        { fg = c.comment, bg = c.bg_dark })
-hl("TabLineFill",    { fg = c.comment, bg = c.bg_dark })
-hl("TabLineSel",     { fg = c.white, bg = c.bg, bold = true })
+hl("StatusLine",     { fg = c.fg_dim, bg = c.bg_light })
+hl("StatusLineNC",   { fg = c.comment, bg = c.bg_light })
+hl("TabLine",        { fg = c.comment, bg = c.bg_light })
+hl("TabLineFill",    { fg = c.comment, bg = c.bg_light })
+hl("TabLineSel",     { fg = c.black, bg = c.bg, bold = true })
 hl("WinBar",         { fg = c.fg_dim, bg = c.none })
 hl("WinBarNC",       { fg = c.comment, bg = c.none })
 
 -- Popup menu
 hl("Pmenu",          { fg = c.fg, bg = c.bg_alt })
-hl("PmenuSel",       { fg = c.white, bg = c.sel, bold = true })
+hl("PmenuSel",       { fg = c.black, bg = c.sel, bold = true })
 hl("PmenuSbar",      { bg = c.bg_alt })
 hl("PmenuThumb",     { bg = c.gutter })
 hl("PmenuKind",      { fg = c.type, bg = c.bg_alt })
@@ -154,7 +155,7 @@ hl("Boolean",        { fg = c.number, bold = true })
 hl("Identifier",     { fg = c.fg })
 hl("Function",       { fg = c.func })
 
--- SIGNATURE: keywords / storage / control-flow are white, bold, underline.
+-- SIGNATURE: keywords / storage / control-flow are black, bold, underline.
 hl("Statement",      KW)
 hl("Conditional",    KW)
 hl("Repeat",         KW)
@@ -184,7 +185,7 @@ hl("Debug",          { fg = c.fg_dim })
 hl("Underlined",     { fg = c.func, underline = true })
 hl("Ignore",         { fg = c.gutter })
 hl("Error",          { fg = c.err, bold = true })
-hl("Todo",           { fg = c.bg_dark, bg = c.number, bold = true })
+hl("Todo",           { fg = c.bg, bg = c.number, bold = true })
 
 -- ---------------------------------------------------------------------------
 -- Diagnostics (LSP) — grayscale only; severity conveyed via undercurl.
@@ -209,15 +210,15 @@ hl("LspReferenceRead",  { bg = c.sel })
 hl("LspReferenceWrite", { bg = c.sel })
 hl("LspInlayHint",      { fg = c.comment, bg = c.bg_hi })
 hl("LspCodeLens",       { fg = c.comment, italic = true })
-hl("LspSignatureActiveParameter", { fg = c.white, bold = true })
+hl("LspSignatureActiveParameter", { fg = c.black, bold = true })
 
 -- ---------------------------------------------------------------------------
 -- Diff / Git — grayscale only.
 -- ---------------------------------------------------------------------------
-hl("DiffAdd",        { bg = "#161616" })
-hl("DiffChange",     { bg = "#121212" })
-hl("DiffDelete",     { fg = c.comment, bg = "#0D0D0D" })
-hl("DiffText",       { bg = "#242424" })
+hl("DiffAdd",        { bg = "#EEEEEE" })
+hl("DiffChange",     { bg = "#F2F2F2" })
+hl("DiffDelete",     { fg = c.comment, bg = "#F4F4F4" })
+hl("DiffText",       { bg = "#DADADA" })
 hl("diffAdded",      { fg = c.fg })
 hl("diffRemoved",    { fg = c.comment })
 hl("diffChanged",    { fg = c.string })
@@ -242,10 +243,10 @@ hl("SpellLocal", { undercurl = true, sp = c.hint })
 -- Comments
 hl("@comment",               { fg = c.comment, italic = true })
 hl("@comment.documentation", { fg = c.doc, italic = true })
-hl("@comment.error",         { fg = c.bg_dark, bg = c.err, bold = true })
-hl("@comment.warning",       { fg = c.bg_dark, bg = c.warn, bold = true })
-hl("@comment.todo",          { fg = c.bg_dark, bg = c.number, bold = true })
-hl("@comment.note",          { fg = c.bg_dark, bg = c.fg_dim, bold = true })
+hl("@comment.error",         { fg = c.bg, bg = c.err, bold = true })
+hl("@comment.warning",       { fg = c.bg, bg = c.warn, bold = true })
+hl("@comment.todo",          { fg = c.bg, bg = c.number, bold = true })
+hl("@comment.note",          { fg = c.bg, bg = c.fg_dim, bold = true })
 
 -- Strings
 hl("@string",                { fg = c.string })
@@ -266,7 +267,7 @@ hl("@constant",              { fg = c.number })
 hl("@constant.builtin",      { fg = c.number, bold = true })
 hl("@constant.macro",        { fg = c.type })
 
--- SIGNATURE: keywords / control-flow / storage → white, bold, underline
+-- SIGNATURE: keywords / control-flow / storage → black, bold, underline
 hl("@keyword",                     KW)
 hl("@keyword.function",            KW)
 hl("@keyword.operator",            KW)
@@ -330,8 +331,8 @@ hl("@attribute.builtin", { fg = c.type, italic = true })
 hl("@decorator",         { fg = c.type, italic = true })
 
 -- Markup (markdown, etc.)
-hl("@markup.heading",        { fg = c.white, bold = true })
-hl("@markup.heading.1",      { fg = c.white, bold = true })
+hl("@markup.heading",        { fg = c.black, bold = true })
+hl("@markup.heading.1",      { fg = c.black, bold = true })
 hl("@markup.heading.2",      { fg = c.func, bold = true })
 hl("@markup.heading.3",      { fg = c.type, bold = true })
 hl("@markup.strong",         { fg = c.func, bold = true })
@@ -392,17 +393,17 @@ hl("TelescopeNormal",       { fg = c.fg, bg = c.bg_alt })
 hl("TelescopeBorder",       { fg = c.border, bg = c.bg_alt })
 hl("TelescopePromptNormal", { fg = c.fg, bg = c.bg_hi })
 hl("TelescopePromptBorder", { fg = c.bg_hi, bg = c.bg_hi })
-hl("TelescopePromptTitle",  { fg = c.bg_dark, bg = c.white, bold = true })
+hl("TelescopePromptTitle",  { fg = c.bg, bg = c.black, bold = true })
 hl("TelescopeResultsTitle", { fg = c.bg_alt, bg = c.bg_alt })
-hl("TelescopePreviewTitle", { fg = c.bg_dark, bg = c.fg_dim, bold = true })
-hl("TelescopeSelection",    { fg = c.white, bg = c.sel, bold = true })
-hl("TelescopeMatching",     { fg = c.white, bold = true })
+hl("TelescopePreviewTitle", { fg = c.bg, bg = c.fg_dim, bold = true })
+hl("TelescopeSelection",    { fg = c.black, bg = c.sel, bold = true })
+hl("TelescopeMatching",     { fg = c.black, bold = true })
 
 hl("NvimTreeNormal",           { fg = c.fg_dim, bg = c.bg_alt })
 hl("NvimTreeFolderName",       { fg = c.type })
 hl("NvimTreeFolderIcon",       { fg = c.type })
 hl("NvimTreeOpenedFolderName", { fg = c.type, bold = true })
-hl("NvimTreeRootFolder",       { fg = c.white, bold = true })
+hl("NvimTreeRootFolder",       { fg = c.black, bold = true })
 hl("NvimTreeGitDirty",         { fg = c.string })
 hl("NvimTreeSpecialFile",      { fg = c.func, underline = true })
 hl("NvimTreeIndentMarker",     { fg = c.border })
@@ -410,11 +411,11 @@ hl("NvimTreeIndentMarker",     { fg = c.border })
 hl("NeoTreeNormal",        { fg = c.fg_dim, bg = c.bg_alt })
 hl("NeoTreeNormalNC",      { fg = c.fg_dim, bg = c.bg_alt })
 hl("NeoTreeDirectoryName", { fg = c.type })
-hl("NeoTreeRootName",      { fg = c.white, bold = true })
+hl("NeoTreeRootName",      { fg = c.black, bold = true })
 hl("NeoTreeGitModified",   { fg = c.string })
 hl("NeoTreeGitUntracked",  { fg = c.fg_dim })
 
-hl("WhichKey",          { fg = c.white, bold = true })
+hl("WhichKey",          { fg = c.black, bold = true })
 hl("WhichKeyGroup",     { fg = c.type })
 hl("WhichKeyDesc",      { fg = c.fg })
 hl("WhichKeySeparator", { fg = c.comment })
@@ -432,23 +433,23 @@ hl("IblIndent",           { fg = c.border })
 hl("IblScope",            { fg = c.gutter })
 
 -- ---------------------------------------------------------------------------
--- Terminal ANSI colors — grayscale ramp (black → white, no hues).
+-- Terminal ANSI colors — grayscale ramp (readable inks on paper, no hues).
 -- ---------------------------------------------------------------------------
 vim.g.terminal_color_0  = "#000000"
-vim.g.terminal_color_1  = "#5A5A5A"
-vim.g.terminal_color_2  = "#767676"
-vim.g.terminal_color_3  = "#929292"
-vim.g.terminal_color_4  = "#A8A8A8"
-vim.g.terminal_color_5  = "#BEBEBE"
-vim.g.terminal_color_6  = "#D4D4D4"
-vim.g.terminal_color_7  = "#E4E4E4"
-vim.g.terminal_color_8  = "#6E6E6E"
-vim.g.terminal_color_9  = "#7C7C7C"
-vim.g.terminal_color_10 = "#8C8C8C"
-vim.g.terminal_color_11 = "#A0A0A0"
-vim.g.terminal_color_12 = "#B4B4B4"
-vim.g.terminal_color_13 = "#C6C6C6"
-vim.g.terminal_color_14 = "#E0E0E0"
-vim.g.terminal_color_15 = "#FFFFFF"
+vim.g.terminal_color_1  = "#3C3C3C"
+vim.g.terminal_color_2  = "#4E4E4E"
+vim.g.terminal_color_3  = "#606060"
+vim.g.terminal_color_4  = "#525252"
+vim.g.terminal_color_5  = "#444444"
+vim.g.terminal_color_6  = "#363636"
+vim.g.terminal_color_7  = "#8A8A8A"
+vim.g.terminal_color_8  = "#6C6C6C"
+vim.g.terminal_color_9  = "#2A2A2A"
+vim.g.terminal_color_10 = "#383838"
+vim.g.terminal_color_11 = "#4A4A4A"
+vim.g.terminal_color_12 = "#3E3E3E"
+vim.g.terminal_color_13 = "#303030"
+vim.g.terminal_color_14 = "#202020"
+vim.g.terminal_color_15 = "#000000"
 
 return M
