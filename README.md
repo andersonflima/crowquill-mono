@@ -12,11 +12,19 @@ largura folgada), com uma
 feature OpenType `calt` que troca a sequência exata de uma keyword pelos glifos em negrito,
 **só quando é a palavra inteira** — `const` bolda, `constante`/`myconst`/`const_val` não.
 
-Acompanha o tema **Crowquill Ink** (VS Code + Neovim) — monocromático (preto & branco),
-em duas variantes **dark** e **light**, onde a keyword é o único elemento em contraste
-máximo (branco/preto puro) + negrito + sublinhado, e todo o resto fica em tons de cinza.
+Acompanha o tema **Crowquill Ink** (Neovim + VS Code) — monocromático (preto & branco),
+em duas variantes **dark** e **light**: a keyword salta em contraste máximo (branco/preto puro)
+com **negrito bem forte**, os blocos `{}` `[]` `:` ficam acesos, e os comentários saem em
+**itálico cursivo** (face itálica da fonte). Todo o resto fica em tons de cinza.
+
+## Preview
+
+Dark — fundo preto, fonte branca:
 
 ![Crowquill Ink dark](dist/specimen-dark.png)
+
+Light — fundo branco, fonte preta:
+
 ![Crowquill Ink light](dist/specimen-light.png)
 
 ## Como funciona (o truque)
