@@ -8,3 +8,4 @@ build/
 sources/ComicNeue-*.ttf
 dist/*.zip
 sources/iosevka/
+dist/webfonts/
