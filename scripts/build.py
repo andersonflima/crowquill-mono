@@ -31,7 +31,7 @@ DIST = ROOT / "dist"
 
 FAMILY = "Crowquill Mono"
 PS_FAMILY = "CrowquillMono"
-VERSION = "0.1.0"
+VERSION = "0.2.0"
 
 BASE_TTF = SRC / "jbmono" / "fonts" / "ttf" / "JetBrainsMono-Regular.ttf"
 BOLD_TTF = SRC / "jbmono" / "fonts" / "ttf" / "JetBrainsMono-Bold.ttf"
@@ -191,12 +191,12 @@ def merge_gsub(dst: TTFont, src: TTFont) -> None:
         raise RuntimeError("base GSUB has no calt feature to wire into")
 
 
-def rename(base: TTFont, style: str, is_bold: bool) -> None:
+def rename(base: TTFont, style: str, is_bold: bool, is_italic: bool) -> None:
     name = base["name"]
     ps = f"{PS_FAMILY}-{style.replace(' ', '')}"
     full = f"{FAMILY} {style}" if style != "Regular" else FAMILY
     values = {
-        1: FAMILY, 2: "Bold" if is_bold else "Regular",
+        1: FAMILY, 2: style,  # RIBBI subfamily: Regular/Bold/Italic/Bold Italic
         3: f"{ps};{VERSION}", 4: full, 6: ps,
         16: FAMILY, 17: style,
     }
@@ -204,18 +204,23 @@ def rename(base: TTFont, style: str, is_bold: bool) -> None:
         name.setName(val, nid, 3, 1, 0x409)
         name.setName(val, nid, 1, 0, 0)
 
+    os2 = base["OS/2"]
+    head = base["head"]
+    os2.usWeightClass = 700 if is_bold else 400
+    sel = os2.fsSelection & ~(0x01 | 0x20 | 0x40)  # clear ITALIC, BOLD, REGULAR
+    mac = head.macStyle & ~0x3                      # clear bold+italic mac bits
     if is_bold:
-        base["OS/2"].usWeightClass = 700
-        base["OS/2"].fsSelection = (base["OS/2"].fsSelection & ~0x40) | 0x20  # clear REGULAR, set BOLD
-        base["head"].macStyle |= 0x1
-    else:
-        base["OS/2"].usWeightClass = 400
-        base["OS/2"].fsSelection = (base["OS/2"].fsSelection & ~0x20) | 0x40  # clear BOLD, set REGULAR
-        base["head"].macStyle &= ~0x1
+        sel |= 0x20; mac |= 0x1
+    if is_italic:
+        sel |= 0x01; mac |= 0x2
+    if not is_bold and not is_italic:
+        sel |= 0x40                                 # REGULAR
+    os2.fsSelection = sel
+    head.macStyle = mac
 
 
 def build_face(base_ttf: Path, kw_ttf: Path, keywords: list[str],
-               style: str, is_bold: bool) -> Path:
+               style: str, is_bold: bool, is_italic: bool = False) -> Path:
     print(f"\n[{FAMILY} {style}]  base={base_ttf.name}  keyword-source={kw_ttf.name}")
     base = TTFont(base_ttf)
     kwfont = TTFont(kw_ttf)
@@ -238,7 +243,7 @@ def build_face(base_ttf: Path, kw_ttf: Path, keywords: list[str],
     holder["GSUB"] = mine
     merge_gsub(base, holder)      # append keyword lookups, wire into calt
 
-    rename(base, style, is_bold)
+    rename(base, style, is_bold, is_italic)
 
     out = DIST / f"{PS_FAMILY}-{style.replace(' ', '')}.ttf"
     base.save(out)
@@ -254,7 +259,10 @@ def main() -> int:
     reg = ttf_dir / "JetBrainsMono-Regular.ttf"
     bold = ttf_dir / "JetBrainsMono-Bold.ttf"
     xbold = ttf_dir / "JetBrainsMono-ExtraBold.ttf"
-    for f in (reg, bold, xbold):
+    ital = ttf_dir / "JetBrainsMono-Italic.ttf"
+    bital = ttf_dir / "JetBrainsMono-BoldItalic.ttf"
+    xbital = ttf_dir / "JetBrainsMono-ExtraBoldItalic.ttf"
+    for f in (reg, bold, xbold, ital, bital, xbital):
         if not f.exists():
             print(f"ERRO: fonte-fonte ausente: {f}", file=sys.stderr)
             return 1
@@ -262,10 +270,12 @@ def main() -> int:
     keywords = load_keywords()
     print(f"Crowquill Mono {VERSION} — build ({len(keywords)} keywords)")
 
-    # Regular: keywords bold via JB Bold outlines.
+    # Upright: keyword-bold via a heavier upright weight.
     build_face(reg, bold, keywords, "Regular", is_bold=False)
-    # Bold: keywords extra-bold via JB ExtraBold, so they still stand out in bold text.
     build_face(bold, xbold, keywords, "Bold", is_bold=True)
+    # Italic (comentarios): keyword-bold via a heavier italic weight.
+    build_face(ital, bital, keywords, "Italic", is_bold=False, is_italic=True)
+    build_face(bital, xbital, keywords, "Bold Italic", is_bold=True, is_italic=True)
     return 0
 
 

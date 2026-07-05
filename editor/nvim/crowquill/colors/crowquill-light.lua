@@ -4,8 +4,9 @@
 --  A strict MONOCHROME (black & white / grayscale) ink-on-paper theme tuned
 --  for the Crowquill Mono font. Signature: language keywords / storage /
 --  control-flow are the single DARKEST element — pure black, BOLD and
---  UNDERLINED — while everything else is a dimmer shade of gray. No chromatic
---  colors anywhere.
+--  UNDERLINED. Brackets, delimiters and operators are also inked to pure black
+--  (fg only, NO bold / underline) so structure "pops"; everything else is a
+--  dimmer shade of gray. No chromatic colors anywhere.
 --
 --  Palette is kept identical to the VS Code "Crowquill Ink Light" theme.
 --
@@ -15,7 +16,7 @@
 --    bg_hi     #F2F2F2   line highlight
 --    sel       #DADADA   selection / visual
 --    border    #E4E4E4   splits / borders
---    fg        #3C3C3C   default foreground (variables, identifiers)
+--    fg        #444444   default foreground (variables, identifiers)
 --    fg_dim    #5C5C5C   secondary foreground
 --    gutter    #B0B0B0   line numbers / muted UI
 --    comment   #9E9E9E   comments (italic)
@@ -24,8 +25,9 @@
 --    number    #2A2A2A   numbers / constants / booleans
 --    func      #141414   functions / methods
 --    type      #3A3A3A   types / classes / interfaces / properties
---    operator  #7C7C7C   operators
---    punct     #8A8A8A   punctuation
+--    operator  #7C7C7C   operators (base; treesitter/legacy inked to black)
+--    punct     #8A8A8A   punctuation (tag delimiters; brackets inked to black)
+--    bracket   #000000   brackets / delimiters / operators — inked (fg only)
 --    param     #5C5C5C   parameters (italic)
 --
 --  Usage:  vim.o.background = "light"  →  vim.cmd.colorscheme("crowquill-light")
@@ -52,7 +54,7 @@ local c = {
   bg_hi    = "#F2F2F2",
   sel      = "#DADADA",
   border   = "#E4E4E4",
-  fg       = "#3C3C3C",
+  fg       = "#444444",
   fg_dim   = "#5C5C5C",
   gutter   = "#B0B0B0",
   comment  = "#9E9E9E",
@@ -64,6 +66,7 @@ local c = {
   type     = "#3A3A3A",
   operator = "#7C7C7C",
   punct    = "#8A8A8A",
+  bracket  = "#000000",
   param    = "#5C5C5C",
   -- diagnostics: grayscale only, differentiated by lightness + undercurl
   err      = "#3A3A3A",
@@ -83,6 +86,9 @@ end
 
 -- Signature keyword style: darkest + bold + underline.
 local KW = { fg = c.black, bold = true, underline = true }
+
+-- Bracket / delimiter / operator style: inked to black, fg only (no bold/underline).
+local BR = { fg = c.bracket }
 
 -- ---------------------------------------------------------------------------
 -- Editor UI
@@ -160,7 +166,7 @@ hl("Statement",      KW)
 hl("Conditional",    KW)
 hl("Repeat",         KW)
 hl("Label",          KW)
-hl("Operator",       { fg = c.operator })
+hl("Operator",       BR)
 hl("Keyword",        KW)
 hl("Exception",      KW)
 
@@ -178,7 +184,7 @@ hl("Typedef",        { fg = c.type })
 hl("Special",        { fg = c.number })
 hl("SpecialChar",    { fg = c.number })
 hl("Tag",            KW)
-hl("Delimiter",      { fg = c.punct })
+hl("Delimiter",      BR)
 hl("SpecialComment", { fg = c.doc, italic = true })
 hl("Debug",          { fg = c.fg_dim })
 
@@ -289,11 +295,11 @@ hl("@repeat",                      KW) -- legacy capture name
 hl("@exception",                   KW) -- legacy capture name
 hl("@include",                     KW) -- legacy capture name
 
--- Operators / punctuation
-hl("@operator",              { fg = c.operator })
-hl("@punctuation.delimiter", { fg = c.punct })
-hl("@punctuation.bracket",   { fg = c.punct })
-hl("@punctuation.special",   { fg = c.number })
+-- Operators / punctuation / brackets — inked to black (fg only, no bold/underline)
+hl("@operator",              BR)
+hl("@punctuation.delimiter", BR)
+hl("@punctuation.bracket",   BR)
+hl("@punctuation.special",   BR)
 
 -- Functions / methods
 hl("@function",              { fg = c.func })
@@ -302,7 +308,7 @@ hl("@function.call",         { fg = c.func })
 hl("@function.macro",        { fg = c.type })
 hl("@function.method",       { fg = c.func })
 hl("@function.method.call",  { fg = c.func })
-hl("@constructor",           { fg = c.type })
+hl("@constructor",           BR) -- table/object braces inked like brackets
 
 -- Variables / parameters / fields
 hl("@variable",                   { fg = c.fg })

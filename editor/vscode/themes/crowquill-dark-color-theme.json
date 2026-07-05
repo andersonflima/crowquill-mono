@@ -4,7 +4,7 @@
   "semanticHighlighting": true,
   "colors": {
     "editor.background": "#0A0A0A",
-    "editor.foreground": "#B4B4B4",
+    "editor.foreground": "#A8A8A8",
     "editorLineNumber.foreground": "#4A4A4A",
     "editorLineNumber.activeForeground": "#FFFFFF",
     "editorCursor.foreground": "#FFFFFF",
@@ -60,7 +60,7 @@
     "editorMarkerNavigationError.background": "#C6C6C6",
     "editorMarkerNavigationWarning.background": "#9A9A9A",
 
-    "foreground": "#B4B4B4",
+    "foreground": "#A8A8A8",
     "focusBorder": "#FFFFFF",
     "descriptionForeground": "#8C8C8C",
     "errorForeground": "#C6C6C6",
@@ -434,7 +434,7 @@
       }
     },
     {
-      "name": "Operator",
+      "name": "Operator (BRIGHT — lit delimiter, no bold/underline)",
       "scope": [
         "keyword.operator",
         "keyword.operator.arithmetic",
@@ -445,7 +445,7 @@
         "keyword.operator.ternary"
       ],
       "settings": {
-        "foreground": "#7C7C7C"
+        "foreground": "#FFFFFF"
       }
     },
     {
@@ -529,7 +529,7 @@
         "meta.definition.variable variable.other"
       ],
       "settings": {
-        "foreground": "#B4B4B4"
+        "foreground": "#A8A8A8"
       }
     },
     {
@@ -582,30 +582,33 @@
       }
     },
     {
-      "name": "Punctuation",
+      "name": "Punctuation / Brackets / Delimiters (BRIGHT — lit, no bold/underline)",
       "scope": [
         "punctuation",
-        "punctuation.separator",
-        "punctuation.terminator",
+        "punctuation.definition.block",
+        "punctuation.definition.bracket",
         "punctuation.definition.parameters",
         "punctuation.definition.array",
+        "punctuation.section",
+        "meta.brace",
         "meta.brace.round",
         "meta.brace.square",
-        "punctuation.section"
+        "punctuation.separator",
+        "punctuation.terminator"
       ],
       "settings": {
-        "foreground": "#6E6E6E"
+        "foreground": "#FFFFFF"
       }
     },
     {
-      "name": "Punctuation Accessor / Delimiter",
+      "name": "Punctuation Accessor / Delimiter (BRIGHT — lit, no bold/underline)",
       "scope": [
         "punctuation.accessor",
         "punctuation.separator.key-value",
         "punctuation.separator.dictionary.key-value"
       ],
       "settings": {
-        "foreground": "#6E6E6E"
+        "foreground": "#FFFFFF"
       }
     },
     {
@@ -812,7 +815,7 @@
     "string": "#8C8C8C",
     "number": "#D2D2D2",
     "regexp": "#A0A0A0",
-    "operator": "#7C7C7C",
+    "operator": "#FFFFFF",
     "function": "#EAEAEA",
     "function.declaration": {
       "foreground": "#EAEAEA",
@@ -835,7 +838,7 @@
       "italic": true
     },
     "namespace": "#C6C6C6",
-    "variable": "#B4B4B4",
+    "variable": "#A8A8A8",
     "variable.readonly": "#D2D2D2",
     "variable.constant": "#D2D2D2",
     "property": "#C6C6C6",

@@ -3,8 +3,10 @@
 -- -----------------------------------------------------------------------------
 --  A strict MONOCHROME (black & white / grayscale) ink theme tuned for the
 --  Crowquill Mono font. Signature: language keywords / storage / control-flow
---  are the single BRIGHTEST element — pure white, BOLD and UNDERLINED — while
---  everything else is a dimmer shade of gray. No chromatic colors anywhere.
+--  are the single BRIGHTEST element — pure white, BOLD and UNDERLINED. Brackets,
+--  delimiters and operators are also lit to pure white (fg only, NO bold /
+--  underline) so structure "pops"; everything else is a dimmer shade of gray.
+--  No chromatic colors anywhere.
 --
 --  Palette is kept identical to the VS Code "Crowquill Ink Dark" theme.
 --
@@ -14,7 +16,7 @@
 --    bg_hi     #141414   line highlight
 --    sel       #2A2A2A   selection / visual
 --    border    #1E1E1E   splits / borders
---    fg        #B4B4B4   default foreground (variables, identifiers)
+--    fg        #A8A8A8   default foreground (variables, identifiers)
 --    fg_dim    #9A9A9A   secondary foreground
 --    gutter    #4A4A4A   line numbers / muted UI
 --    comment   #565656   comments (italic)
@@ -23,8 +25,9 @@
 --    number    #D2D2D2   numbers / constants / booleans
 --    func      #EAEAEA   functions / methods
 --    type      #C6C6C6   types / classes / interfaces / properties
---    operator  #7C7C7C   operators
---    punct     #6E6E6E   punctuation
+--    operator  #7C7C7C   operators (base; treesitter/legacy lit to white)
+--    punct     #6E6E6E   punctuation (tag delimiters; brackets lit to white)
+--    bracket   #FFFFFF   brackets / delimiters / operators — lit (fg only)
 --    param     #A0A0A0   parameters (italic)
 --
 --  Usage:  vim.o.background = "dark"  →  vim.cmd.colorscheme("crowquill")
@@ -51,7 +54,7 @@ local c = {
   bg_hi    = "#141414",
   sel      = "#2A2A2A",
   border   = "#1E1E1E",
-  fg       = "#B4B4B4",
+  fg       = "#A8A8A8",
   fg_dim   = "#9A9A9A",
   gutter   = "#4A4A4A",
   comment  = "#565656",
@@ -63,6 +66,7 @@ local c = {
   type     = "#C6C6C6",
   operator = "#7C7C7C",
   punct    = "#6E6E6E",
+  bracket  = "#FFFFFF",
   param    = "#A0A0A0",
   -- diagnostics: grayscale only, differentiated by lightness + undercurl
   err      = "#C6C6C6",
@@ -82,6 +86,9 @@ end
 
 -- Signature keyword style: brightest + bold + underline.
 local KW = { fg = c.white, bold = true, underline = true }
+
+-- Bracket / delimiter / operator style: lit to white, fg only (no bold/underline).
+local BR = { fg = c.bracket }
 
 -- ---------------------------------------------------------------------------
 -- Editor UI
@@ -159,7 +166,7 @@ hl("Statement",      KW)
 hl("Conditional",    KW)
 hl("Repeat",         KW)
 hl("Label",          KW)
-hl("Operator",       { fg = c.operator })
+hl("Operator",       BR)
 hl("Keyword",        KW)
 hl("Exception",      KW)
 
@@ -177,7 +184,7 @@ hl("Typedef",        { fg = c.type })
 hl("Special",        { fg = c.number })
 hl("SpecialChar",    { fg = c.number })
 hl("Tag",            KW)
-hl("Delimiter",      { fg = c.punct })
+hl("Delimiter",      BR)
 hl("SpecialComment", { fg = c.doc, italic = true })
 hl("Debug",          { fg = c.fg_dim })
 
@@ -288,11 +295,11 @@ hl("@repeat",                      KW) -- legacy capture name
 hl("@exception",                   KW) -- legacy capture name
 hl("@include",                     KW) -- legacy capture name
 
--- Operators / punctuation
-hl("@operator",              { fg = c.operator })
-hl("@punctuation.delimiter", { fg = c.punct })
-hl("@punctuation.bracket",   { fg = c.punct })
-hl("@punctuation.special",   { fg = c.number })
+-- Operators / punctuation / brackets — lit to white (fg only, no bold/underline)
+hl("@operator",              BR)
+hl("@punctuation.delimiter", BR)
+hl("@punctuation.bracket",   BR)
+hl("@punctuation.special",   BR)
 
 -- Functions / methods
 hl("@function",              { fg = c.func })
@@ -301,7 +308,7 @@ hl("@function.call",         { fg = c.func })
 hl("@function.macro",        { fg = c.type })
 hl("@function.method",       { fg = c.func })
 hl("@function.method.call",  { fg = c.func })
-hl("@constructor",           { fg = c.type })
+hl("@constructor",           BR) -- table/object braces lit like brackets
 
 -- Variables / parameters / fields
 hl("@variable",                   { fg = c.fg })
