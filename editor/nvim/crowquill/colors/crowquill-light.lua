@@ -85,7 +85,7 @@ local function hl(group, opts)
 end
 
 -- Signature keyword style: darkest + bold + underline.
-local KW = { fg = c.black, bold = true, underline = true }
+local KW = { fg = c.black, bold = true }
 
 -- Bracket / delimiter / operator style: inked to black, fg only (no bold/underline).
 local BR = { fg = c.bracket }
@@ -114,7 +114,7 @@ hl("VisualNOS",      { bg = c.sel })
 hl("Search",         { fg = c.bg, bg = c.number })
 hl("IncSearch",      { fg = c.bg, bg = c.black })
 hl("CurSearch",      { fg = c.bg, bg = c.black })
-hl("MatchParen",     { fg = c.black, bold = true, underline = true })
+hl("MatchParen",     { fg = c.black, bold = true })
 hl("NonText",        { fg = "#D8D8D8" })
 hl("Whitespace",     { fg = "#D8D8D8" })
 hl("SpecialKey",     { fg = "#D8D8D8" })

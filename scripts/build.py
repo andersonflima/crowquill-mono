@@ -2,10 +2,10 @@
 """
 Crowquill Mono — build engine.
 
-Base: JetBrains Mono (Regular/Bold).
+Base: a custom Iosevka build (see iosevka/private-build-plans.toml).
 Signature feature: language keywords render BOLD automatically, via an
 OpenType `calt` (contextual alternates) feature with word-boundary guards.
-JetBrains Mono's native code ligatures are PRESERVED (GSUB lookups are merged,
+The base font's native code ligatures are PRESERVED (GSUB lookups are merged,
 not replaced).
 
 The font cannot know the language semantically — it matches exact character
@@ -31,7 +31,7 @@ DIST = ROOT / "dist"
 
 FAMILY = "Crowquill Mono"
 PS_FAMILY = "CrowquillMono"
-VERSION = "0.3.0"
+VERSION = "0.4.0"
 
 BASE_TTF = SRC / "jbmono" / "fonts" / "ttf" / "JetBrainsMono-Regular.ttf"
 BOLD_TTF = SRC / "jbmono" / "fonts" / "ttf" / "JetBrainsMono-Bold.ttf"

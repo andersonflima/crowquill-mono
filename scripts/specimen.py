@@ -76,10 +76,8 @@ def draw_line(draw, font, ital, y, text, pal):
             draw.text((MARGIN + col * CELL, y), text[i:], font=ital, fill=pal["COM"])
             break
         x = MARGIN + col * CELL
-        if tok in MASTER:                                   # keyword: bright + underline
+        if tok in MASTER:                                   # keyword: bright + bold (sem underline)
             draw.text((x, y), tok, font=font, fill=pal["BRIGHT"])
-            draw.line([(x, ul_y), (x + len(tok) * CELL - CELL * 0.15, ul_y)],
-                      fill=pal["BRIGHT"], width=2)
         elif tok in PUNCT:                                  # block/operator: bright, no underline
             draw.text((x, y), tok, font=font, fill=pal["BRIGHT"])
         elif NUM_RE.fullmatch(tok):

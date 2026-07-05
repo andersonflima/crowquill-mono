@@ -390,7 +390,7 @@
       ],
       "settings": {
         "foreground": "#000000",
-        "fontStyle": "bold underline"
+        "fontStyle": "bold"
       }
     },
     {
@@ -410,7 +410,7 @@
       ],
       "settings": {
         "foreground": "#000000",
-        "fontStyle": "bold underline"
+        "fontStyle": "bold"
       }
     },
     {
@@ -430,7 +430,7 @@
       ],
       "settings": {
         "foreground": "#000000",
-        "fontStyle": "bold underline"
+        "fontStyle": "bold"
       }
     },
     {
@@ -636,7 +636,7 @@
       ],
       "settings": {
         "foreground": "#000000",
-        "fontStyle": "bold underline"
+        "fontStyle": "bold"
       }
     },
     {

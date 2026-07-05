@@ -11,7 +11,14 @@ exportGlyphNames = true
 inherits = "ss20"           # Curly (terminais curvos, caligrafico)
 
 [buildPlans.Crowquill.variants.design]
-g = 'single-storey-serifless'   # g manuscrito (andar unico)
+a = 'single-storey-serifless'          # andar unico (manuscrito)
+g = 'single-storey-serifless'
+f = 'flat-hook-tailed'                 # f descendente com cauda (script)
+i = 'tailed-serifed'
+j = 'diagonal-tailed-serifed'
+k = 'cursive-serifless'                # k cursivo
+l = 'tailed'
+t = 'diagonal-tailed-short-neck'       # t com cauda
 
 [buildPlans.Crowquill.variants.italic]
 i = 'tailed-serifed'            # comentarios: caudas cursivas
