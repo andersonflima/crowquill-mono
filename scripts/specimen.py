@@ -2,7 +2,7 @@
 """Render monochrome (ink) specimens of Crowquill Mono using real HarfBuzz shaping.
 
 Shows the theme's emphasis model:
-- keyword  = brightest (pure white/black) + bold + underline  (font `calt` bolds it)
+- keyword  = brightest (pure white/black) + bold  (font `calt` bolds it)
 - blocks/punctuation/operators = bright (no underline) so they "pop"
 - comments = the true Italic face (Crowquill Mono Italic), dim gray
 - everything else = mid-gray
@@ -18,7 +18,7 @@ BOLD = ROOT / "dist" / "CrowquillMono-Bold.ttf"
 ITAL = ROOT / "dist" / "CrowquillMono-Italic.ttf"
 
 PALETTES = {
-    "dark":  {"BG": "#0A0A0A", "FG": "#A8A8A8", "BRIGHT": "#FFFFFF", "STR": "#8C8C8C",
+    "dark":  {"BG": "#0A0A0A", "FG": "#B8B8B8", "BRIGHT": "#FFFFFF", "STR": "#8C8C8C",
               "NUM": "#D2D2D2", "COM": "#6A6A6A"},
     "light": {"BG": "#FFFFFF", "FG": "#444444", "BRIGHT": "#000000", "STR": "#6C6C6C",
               "NUM": "#2A2A2A", "COM": "#9A9A9A"},
@@ -62,7 +62,6 @@ def draw_line(draw, font, ital, y, text, pal):
     if text.lstrip().startswith(("//", "#")):
         draw.text((MARGIN, y), text, font=ital, fill=pal["COM"])   # italic comment
         return
-    ul_y = int(y + SIZE * 1.06)
     i = col = 0
     while i < len(text):
         m = STR_RE.match(text, i)

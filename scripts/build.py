@@ -31,7 +31,7 @@ DIST = ROOT / "dist"
 
 FAMILY = "Crowquill Mono"
 PS_FAMILY = "CrowquillMono"
-VERSION = "0.4.0"
+VERSION = "0.5.0"
 
 BASE_TTF = SRC / "jbmono" / "fonts" / "ttf" / "JetBrainsMono-Regular.ttf"
 BOLD_TTF = SRC / "jbmono" / "fonts" / "ttf" / "JetBrainsMono-Bold.ttf"

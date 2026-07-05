@@ -16,7 +16,7 @@
 --    bg_hi     #141414   line highlight
 --    sel       #2A2A2A   selection / visual
 --    border    #1E1E1E   splits / borders
---    fg        #A8A8A8   default foreground (variables, identifiers)
+--    fg        #B8B8B8   default foreground (variables, identifiers)
 --    fg_dim    #9A9A9A   secondary foreground
 --    gutter    #4A4A4A   line numbers / muted UI
 --    comment   #565656   comments (italic)
@@ -54,7 +54,7 @@ local c = {
   bg_hi    = "#141414",
   sel      = "#2A2A2A",
   border   = "#1E1E1E",
-  fg       = "#A8A8A8",
+  fg       = "#B8B8B8",
   fg_dim   = "#9A9A9A",
   gutter   = "#4A4A4A",
   comment  = "#565656",
@@ -445,7 +445,7 @@ vim.g.terminal_color_0  = "#000000"
 vim.g.terminal_color_1  = "#5A5A5A"
 vim.g.terminal_color_2  = "#767676"
 vim.g.terminal_color_3  = "#929292"
-vim.g.terminal_color_4  = "#A8A8A8"
+vim.g.terminal_color_4  = "#B8B8B8"
 vim.g.terminal_color_5  = "#BEBEBE"
 vim.g.terminal_color_6  = "#D4D4D4"
 vim.g.terminal_color_7  = "#E4E4E4"

@@ -4,7 +4,7 @@
   "semanticHighlighting": true,
   "colors": {
     "editor.background": "#0A0A0A",
-    "editor.foreground": "#A8A8A8",
+    "editor.foreground": "#B8B8B8",
     "editorLineNumber.foreground": "#4A4A4A",
     "editorLineNumber.activeForeground": "#FFFFFF",
     "editorCursor.foreground": "#FFFFFF",
@@ -60,7 +60,7 @@
     "editorMarkerNavigationError.background": "#C6C6C6",
     "editorMarkerNavigationWarning.background": "#9A9A9A",
 
-    "foreground": "#A8A8A8",
+    "foreground": "#B8B8B8",
     "focusBorder": "#FFFFFF",
     "descriptionForeground": "#8C8C8C",
     "errorForeground": "#C6C6C6",
@@ -249,7 +249,7 @@
     "terminal.ansiRed": "#5A5A5A",
     "terminal.ansiGreen": "#767676",
     "terminal.ansiYellow": "#929292",
-    "terminal.ansiBlue": "#A8A8A8",
+    "terminal.ansiBlue": "#B8B8B8",
     "terminal.ansiMagenta": "#BEBEBE",
     "terminal.ansiCyan": "#D4D4D4",
     "terminal.ansiWhite": "#E4E4E4",
@@ -529,7 +529,7 @@
         "meta.definition.variable variable.other"
       ],
       "settings": {
-        "foreground": "#A8A8A8"
+        "foreground": "#B8B8B8"
       }
     },
     {
@@ -838,7 +838,7 @@
       "italic": true
     },
     "namespace": "#C6C6C6",
-    "variable": "#A8A8A8",
+    "variable": "#B8B8B8",
     "variable.readonly": "#D2D2D2",
     "variable.constant": "#D2D2D2",
     "property": "#C6C6C6",

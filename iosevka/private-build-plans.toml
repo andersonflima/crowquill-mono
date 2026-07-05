@@ -14,11 +14,15 @@ inherits = "ss20"           # Curly (terminais curvos, caligrafico)
 a = 'single-storey-serifless'          # andar unico (manuscrito)
 g = 'single-storey-serifless'
 f = 'flat-hook-tailed'                 # f descendente com cauda (script)
+h = 'tailed-serifless'                 # caudas (mais cursivo/conectado)
 i = 'tailed-serifed'
 j = 'diagonal-tailed-serifed'
 k = 'cursive-serifless'                # k cursivo
 l = 'tailed'
+m = 'tailed-serifless'
+n = 'tailed-serifless'
 t = 'diagonal-tailed-short-neck'       # t com cauda
+u = 'tailed-serifless'
 
 [buildPlans.Crowquill.variants.italic]
 i = 'tailed-serifed'            # comentarios: caudas cursivas
@@ -29,7 +33,7 @@ inherits = "default-calt"
 
 # pesos: Regular corpo, Bold, Heavy (fonte do keyword-bold)
 [buildPlans.Crowquill.weights.Regular]
-shape = 400
+shape = 350   # corpo mais leve -> contraste dramatico com a keyword Heavy 900
 menu = 400
 css = 400
 
